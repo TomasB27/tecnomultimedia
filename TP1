@@ -1,0 +1,67 @@
+  PImage francesa1;
+  PImage francesa2;
+  PImage francesa3;
+  PFont fuente;
+  int pantalla = 1;
+  float visibilidad = 0;
+  float movimiento1 = -200;
+  float movimiento2 = 600;
+  float movimiento3 = -200;
+  float vision = 25;
+  int posX = 0;  
+  void setup(){
+    size(640,480);
+    textSize(30);
+    francesa1 = loadImage("francesa 1.jpg");
+    francesa2 = loadImage("francesa 2.jpg");
+    francesa3= loadImage("francesa 3.jpg");
+    fuente= loadFont("Arial-ItalicMT-48.vlw");
+    
+  }
+  
+  void draw(){
+    background(200);
+    
+    if (pantalla == 1) {
+      image(francesa1, 0, 0, 640, 480);
+      textFont(fuente,25);
+      fill(55);
+      text("Esta es una herramienta llamada llave francesa", 0, movimiento1);
+      movimiento1 = movimiento1 + 0.9;
+  } else if (pantalla == 2) {
+      image(francesa2, 0, 0, 640, 480);
+      textFont(fuente,25);
+      fill(20);
+      text("Sirve para apretar y aflojar tornillos o tuercas", 0, movimiento2);
+      movimiento2 = movimiento2 - 1.2;
+  } else if (pantalla == 3) {
+      image(francesa3, 0 ,0, 640, 480);
+      textFont(fuente,25);
+      fill(50);
+      text("Esta es solo un tipo, existen mas llaves, como la inglesa.", 0, movimiento3);
+      movimiento3 = movimiento3 + 1;
+      vision = vision + 0.4;
+  }
+      if(frameCount % 900 == 0){
+    pantalla = pantalla + 1;
+  }
+    if(pantalla > 3) {
+      pantalla = pantalla - 1;
+  } if(frameCount > 3600) {
+      fill(255);
+      rect(510,400,105,50);
+      fill(255,46,46);
+      text("Reiniciar",515,440);
+  }  
+     
+}
+  void mouseClicked(){
+    if(mouseX > 510 && mouseY > 410 && mouseX < 590 && mouseY < 455 && pantalla == 3){
+      pantalla = 1;
+      frameCount = 0;
+      movimiento1 = -200;
+      movimiento2 = 600;
+      movimiento3 = -200;
+      vision = 25;
+    }
+  }
